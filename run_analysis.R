@@ -1,6 +1,6 @@
 path <- getwd()
 
-pathRoot <- paste0(path,"/UCI HAR Dataset/")
+pathRoot <- paste0(path,"/UCI HAR Dataset")
 pathTrain <- paste0(path,"/UCI HAR Dataset/train")
 pathTest <- paste0(path,"/UCI HAR Dataset/test")
 
@@ -9,7 +9,7 @@ ftrain <- file.path(pathTrain, "X_train.txt")
 ftest <- file.path(pathTest, "X_test.txt")
 
 # read name of features
-features <- read.table(file.path(pathRoot), "features.txt")[,2]
+features <- read.table(file.path(pathRoot, "features.txt"))[,2]
 
 # read.table: Reads a file in table format and creates a data frame
 dtrain <-read.table(ftrain)
@@ -32,7 +32,7 @@ label <- rbind(ltrain,ltest)
 colnames(label) <- "activityId"
 
 ####  3. Uses descriptive activity names to name the activities in the data set
-activity_labels <- read.table(file.path(paste0(path,"/UCI HAR Dataset/"),"activity_labels.txt"))
+activity_labels <- read.table(file.path(pathRoot,"activity_labels.txt"))
 colnames(activity_labels)<- c("activityId","activityName")
 label <- merge(x = label, y = activity_labels, by.x = "activityId", by.y = "activityId")
 # Concanate labels in data
